@@ -43,7 +43,7 @@ func newBlockPuller(
 	clusterConfig localconfig.Cluster) (BlockPuller, error) {
 
 	verifyBlockSequence := func(blocks []*common.Block, _ string) error {
-		return cluster.VerifyBlocks(blocks, support)
+		return cluster.VerifyBlocksBFT(blocks, support)
 	}
 
 	stdDialer := &cluster.StandardDialer{
