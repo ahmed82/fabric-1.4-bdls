@@ -48,6 +48,7 @@ import (
 	"github.com/hyperledger/fabric/orderer/consensus/etcdraft"
 	"github.com/hyperledger/fabric/orderer/consensus/kafka"
 	"github.com/hyperledger/fabric/orderer/consensus/smartbft"
+	"github.com/hyperledger/fabric/orderer/consensus/bdls"
 	"github.com/hyperledger/fabric/orderer/consensus/solo"
 	cb "github.com/hyperledger/fabric/protos/common"
 	ab "github.com/hyperledger/fabric/protos/orderer"
@@ -70,6 +71,7 @@ var (
 	clusterTypes = map[string]struct{}{
 		"etcdraft": {},
 		"smartbft": {},
+		"bdls": {},
 	}
 )
 
@@ -671,6 +673,10 @@ func initializeMultichannelRegistrar(
 				// TODO: Add full initialization with required parameters. Consider to abstract out common pieces of Etcd Raft and
 				// BFT Smart to reuse them.
 				consenters["smartbft"] = smartbft.New(dpmr.Registry(), signer, clusterDialer, conf, srvConf, srv, registrar, metricsProvider)
+			}
+		case "bdls":
+			{
+				
 			}
 		default:
 			logger.Panicf("Unknown cluster type consenter")

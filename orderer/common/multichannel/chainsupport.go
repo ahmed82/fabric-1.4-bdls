@@ -62,6 +62,10 @@ func newChainSupport(
 		synchronousBlockWriting = true
 	}
 
+	if oc.ConsensusType() == "bdls" {
+		synchronousBlockWriting = true
+	}
+
 	// Set up the msgprocessor
 	cs.Processor = msgprocessor.NewStandardChannel(cs, msgprocessor.CreateStandardChannelFilters(cs, registrar.config))
 
